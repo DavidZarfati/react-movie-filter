@@ -1,6 +1,7 @@
-
 import { useState, useEffect } from 'react';
 import './App.css';
+
+// array di oggetti iniziale
 const filmsIniziali = [
   { title: 'Inception', genre: 'Fantascienza' },
   { title: 'Il Padrino', genre: 'Thriller' },
@@ -14,12 +15,14 @@ const filmsIniziali = [
 
 
 function App() {
-  // Calcola i generi unici iniziali
-  const generiIniziali = filmsIniziali.reduce((acc, film) => {
-    if (!acc.includes(film.genre)) acc.push(film.genre);
-    return acc;
+  // Calcola i generi unici iniziali(inteso come ogni genere presente univocamente nella lista originale)
+  // Uso la reduce(Grazie Samuel) per creare il nuovo array con solo i generi univoci
+  const generiIniziali = filmsIniziali.reduce((arrayGeneri, film) => {
+    // nel mio if, filtro per vedere se il mio array di appoggio contiene gia il genere, senno lo aggiungo e poi Ritorno l'array completo
+    if (!arrayGeneri.includes(film.genre)) arrayGeneri.push(film.genre);
+    return arrayGeneri;
   }, []);
-
+  // // // // // // // Sezione Usestate
   const [nuovoTitolo, impostaNuovoFilm] = useState("");
   const [nuovoGenere, impostaNuovoGenere] = useState("");
   const [films, impostaFilms] = useState(filmsIniziali);
@@ -27,9 +30,12 @@ function App() {
   const [filmsFiltrati, setFilmsFiltrati] = useState(filmsIniziali);
   const [generiUnici, setGeneriUnici] = useState(generiIniziali);
 
+  // Funzione per gestire l'invio
   function gestisciInvio(event) {
     event.preventDefault();
+    // controllo (uso trim per togliere gli spazi) e confronto se quindi è vuoto o fatto solo di spazi
     if (nuovoTitolo.trim()) {
+      // Se valido aggiungo il nuovo oggetto film con il titolo appunto e con il prossimo IF anche il genere(se ne ho messo 1)(And pigro in react)
       impostaFilms([...films, { title: nuovoTitolo, genre: nuovoGenere }]);
       // Aggiorna generiUnici solo se il nuovo genere non è già presente
       if (nuovoGenere.trim() && !generiUnici.includes(nuovoGenere)) {
@@ -39,10 +45,12 @@ function App() {
       impostaNuovoGenere('');
     }
   }
-
+  // Uso di useEffect,(X Loris, ho provato a farlo Cosi, non so se era cosi che avrei dovuto)
   useEffect(() => {
+    // Operatore ternario per decidere cosa fare quando la ricerca è vuota
     const filtrati = searchTerm.length === 0
       ? films
+      // Filtro Dinamico che uso per filtrare con SearchTerm(dichiarato come usestate)(cerco sia genere che titolo in una sola istanza)
       : films.filter(film => {
         const search = searchTerm.toLowerCase();
         return (
@@ -52,7 +60,7 @@ function App() {
       });
     setFilmsFiltrati(filtrati);
   }, [searchTerm, films]);
-
+  // Queste sopra, sono le dipendenze di useeffect,(l'array di dipendenze come detto da Olga e Loris)
   return (
     <div className="App">
       <form onSubmit={gestisciInvio}>
@@ -78,7 +86,7 @@ function App() {
         </ul>
       </div>
       <div className='array-generi'>
-        {/* <h3>Lista dei generi disponibili</h3> */}
+        <h3>Lista dei generi disponibili</h3>
         <ul>
           {generiUnici.map((genere, index) => (
             <li key={genere + index}>{genere}</li>
