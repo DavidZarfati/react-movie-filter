@@ -45,6 +45,23 @@ function App() {
       impostaNuovoGenere('');
     }
   }
+
+  function removeFilm(indexToRemove) {
+    console.log(`Voglio rimuovere l'elemento di indice ${indexToRemove}`);
+
+    // Con un for normale
+    const newFilmsWithout = [];
+    for (let i = 0; i < filmsFiltrati.length; i++) {
+      if (i !== indexToRemove) {
+        newFilmsWithout.push(filmsFiltrati[i]);
+      }
+    }
+    setFilmsFiltrati(newFilmsWithout);
+  }
+
+
+
+
   // Uso di useEffect,(X Loris, ho provato a farlo Cosi, non so se era cosi che avrei dovuto)
   useEffect(() => {
     // Operatore ternario per decidere cosa fare quando la ricerca è vuota
@@ -62,47 +79,52 @@ function App() {
   }, [searchTerm, films]);
   // Queste sopra, sono le dipendenze di useeffect,(l'array di dipendenze come detto da Olga e Loris)
   return (
-    <div className="App">
-      <form onSubmit={gestisciInvio}>
-        <input type="text" placeholder='titolo' value={nuovoTitolo} onChange={(event) => { impostaNuovoFilm(event.target.value) }} />
-        <input type="text" placeholder='genere' value={nuovoGenere} onChange={(event) => { impostaNuovoGenere(event.target.value) }} />
-        <button type="submit">Aggiungi Film</button>
-      </form>
-      <input
-        type="text"
-        placeholder="Cerca per nome o per genere..."
-        value={searchTerm}
-        onChange={event => setSearchTerm(event.target.value)}
-      />
+    <div className="pagina-intera">
+      <div className="sezione-film">
+        <form onSubmit={gestisciInvio}>
+          <input type="text" placeholder='titolo' value={nuovoTitolo} onChange={(event) => { impostaNuovoFilm(event.target.value) }} />
+          <input type="text" placeholder='genere' value={nuovoGenere} onChange={(event) => { impostaNuovoGenere(event.target.value) }} />
+          <button type="submit">Aggiungi Film</button>
+        </form>
+        <input
+          type="text"
+          placeholder="Cerca per nome o per genere..."
+          value={searchTerm}
+          onChange={event => setSearchTerm(event.target.value)}
+        />
 
-      <div>
-        <ul>
-          {filmsFiltrati.map((film, index) => (
-            <li key={film.title + film.genre + index}>
-              <h2>{film.title}</h2>
-              <h4>Genere: {film.genre}</h4>
-            </li>
-          ))}
-        </ul>
+        <div className='film'>
+          <ul className='flex'>
+            {filmsFiltrati.map((film, index) => (
+              <li key={film.title + film.genre + index}>
+                <div className="film-sopra">
+                  <h2>{film.title}</h2>
+                  <button onClick={() => removeFilm(index)}>X</button>
+                </div>
+                <h4>Genere: {film.genre}</h4>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
-      <div className='array-generi'>
-        <h3>Lista dei generi disponibili</h3>
-        <ul>
-          {generiUnici.map((genere, index) => (
-            <li key={genere + index}>{genere}</li>
-          ))}
-        </ul>
+
+
+      <div className="lista-generi">
+        <div className='array-generi'>
+          <h3>Lista dei generi disponibili</h3>
+          <ul>
+            {generiUnici.map((genere, index) => (
+              <li key={genere + index}>{genere}</li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
+
   );
 }
 
 export default App;
-
-
-
-
-
 
 
 
