@@ -14,6 +14,8 @@ function App() {
   const [nuovoTitolo, impostaNuovoFilm] = useState("");
   const [nuovoGenere, impostaNuovoGenere] = useState("");
   const [films, impostaFilms] = useState(filmsIniziali);
+  const [searchTerm, setSearchTerm] = useState("");
+
   function gestisciInvio(event) {
     event.preventDefault();
     if (nuovoTitolo.trim()) {
@@ -24,6 +26,17 @@ function App() {
     }
   }
 
+  useEffect(() => {
+    const filmsFiltrati = filmsIniziali.filter(film => {
+      const search = searchTerm.toLowerCase();
+      return (
+        film.title.toLowerCase().includes(search) ||
+        film.genre.toLowerCase().includes(search)
+      );
+    });
+    impostaFilms(filmsFiltrati);
+  }, [searchTerm]);
+
 
   return (
     <div className="App">
@@ -32,7 +45,12 @@ function App() {
         <input type="text" placeholder='genere' value={nuovoGenere} onChange={(event) => { impostaNuovoGenere(event.target.value) }} />
         <button type="submit">Aggiungi Film</button>
       </form>
-
+      <input
+        type="text"
+        placeholder="Cerca per nome o per genere..."
+        value={searchTerm}
+        onChange={event => setSearchTerm(event.target.value)}
+      />
 
       <div>
         <ul>
