@@ -76,14 +76,14 @@ function App() {
           <input type="text" placeholder='genere' value={nuovoGenere} onChange={(event) => { impostaNuovoGenere(event.target.value) }} />
           <button type="submit">Aggiungi Film</button>
         </form>
-        <div className='cerca-per'>
+        <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', marginTop: '1rem' }}>
           <input
             type="text"
             placeholder="Cerca per nome o per genere..."
             value={searchTerm}
             onChange={event => setSearchTerm(event.target.value)}
           />
-          <select value={genereFiltro} onChange={event => setGenereFiltro(event.target.value)}>
+          <select value={genereFiltro} onChange={e => setGenereFiltro(e.target.value)}>
             <option value="">Tutti i generi</option>
             {generiUnici.map((genere, idx) => (
               <option key={genere + idx} value={genere}>{genere}</option>

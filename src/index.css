@@ -1,102 +1,101 @@
-<<<<<<< HEAD * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+ * {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+ }
 
-body {
-    background-color: rgb(139, 223, 235);
-}
+ body {
+     background-color: rgb(139, 223, 235);
+ }
 
-.pagina-intera {
-    display: flex;
-    justify-content: space-between;
-}
+ .pagina-intera {
+     display: flex;
+     justify-content: space-between;
+ }
 
-input {
-    padding: 10px;
-    margin: 20px;
-}
+ input {
+     padding: 10px;
+     margin: 20px;
+ }
 
-button {
-    padding: 10px;
-}
+ button {
+     padding: 10px;
+ }
 
-.film {
-    margin-left: 40px;
-}
+ .film {
+     margin-left: 40px;
+ }
 
-ul {
-    list-style: none;
-}
+ ul {
+     list-style: none;
+ }
 
-li {
-    border: 1px white solid;
-    margin: 20px;
-    padding: 10px;
-    background-color: rgb(255, 194, 82);
-    border-radius: 5px;
-}
+ li {
+     border: 1px white solid;
+     margin: 20px;
+     padding: 10px;
+     background-color: rgb(255, 194, 82);
+     border-radius: 5px;
+ }
 
-.lista-generi {
-    margin: 100px;
+ .lista-generi {
+     margin: 100px;
 
-}
+ }
 
-.flex {
-    display: flex;
-    flex-wrap: wrap;
-}
+ .flex {
+     display: flex;
+     flex-wrap: wrap;
+ }
 
-.film li {
-    width: 40%;
-}
+ .film li {
+     width: 40%;
+ }
 
-.array-generi {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-}
+ .array-generi {
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     text-align: center;
+ }
 
-.film-sopra {
-    display: flex;
-    justify-content: space-between;
-    position: relative
-}
+ .film-sopra {
+     display: flex;
+     justify-content: space-between;
+     position: relative
+ }
 
-.film-sopra button {
-    padding: 0 7px;
-    background-color: red;
-    font-size: 0.8rem;
-    border-radius: 50%;
-    position: absolute;
-    right: -7px;
-    top: -9px
-}
+ .film-sopra button {
+     padding: 0 7px;
+     background-color: red;
+     font-size: 0.8rem;
+     border-radius: 50%;
+     position: absolute;
+     right: -7px;
+     top: -9px
+ }
 
-.film-sopra button:hover {
-    background-color: black;
-    color: white;
-}
+ .film-sopra button:hover {
+     background-color: black;
+     color: white;
+ }
 
-.film-sopra:hover {
-    color: red;
-}
+ .film-sopra:hover {
+     color: red;
+ }
 
-div.array-generi ul>li:hover {
-    color: green;
-}
+ div.array-generi ul>li:hover {
+     color: green;
+ }
 
-h4:hover {
-    color: green;
-}
+ h4:hover {
+     color: green;
 
-.cerca-per {
-    display: 'flex';
-    gap: '1rem';
-    align-items: 'center';
-    margin-Top: '1rem'
-}
+ }
 
-=======>>>>>>>parent of 6574f07 (feat:aggiunte Grafiche e aggiunto bottone per eliminare i film)
+ .cerca-per {
+     display: 'flex';
+     gap: '1rem';
+     align-items: 'center';
+     margin-Top: '1rem'
+ }
