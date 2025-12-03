@@ -1,4 +1,4 @@
-* {
+<<<<<<< HEAD * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -98,3 +98,5 @@ h4:hover {
     align-items: 'center';
     margin-Top: '1rem'
 }
+
+=======>>>>>>>parent of 6574f07 (feat:aggiunte Grafiche e aggiunto bottone per eliminare i film)

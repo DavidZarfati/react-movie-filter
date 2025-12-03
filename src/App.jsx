@@ -46,23 +46,6 @@ function App() {
       impostaNuovoGenere('');
     }
   }
-
-  function removeFilm(indexToRemove) {
-    console.log(`Voglio rimuovere l'elemento di indice ${indexToRemove}`);
-
-    // Con un for normale
-    const newFilmsWithout = [];
-    for (let i = 0; i < filmsFiltrati.length; i++) {
-      if (i !== indexToRemove) {
-        newFilmsWithout.push(filmsFiltrati[i]);
-      }
-    }
-    setFilmsFiltrati(newFilmsWithout);
-  }
-
-
-
-
   // Uso di useEffect,(X Loris, ho provato a farlo Cosi, non so se era cosi che avrei dovuto)
   useEffect(() => {
     let filtrati = films;
@@ -79,6 +62,12 @@ function App() {
     setFilmsFiltrati(filtrati);
   }, [searchTerm, films, genereFiltro]);
   // Queste sopra, sono le dipendenze di useeffect,(l'array di dipendenze come detto da Olga e Loris)
+  // Funzione per rimuovere un film dalla lista
+  function removeFilm(indexToRemove) {
+    const updatedFilms = films.filter((_, idx) => idx !== indexToRemove);
+    impostaFilms(updatedFilms);
+  }
+
   return (
     <div className="pagina-intera">
       <div className="sezione-film">
@@ -131,6 +120,11 @@ function App() {
 }
 
 export default App;
+
+
+
+
+
 
 
 
