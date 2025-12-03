@@ -29,6 +29,7 @@ function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [filmsFiltrati, setFilmsFiltrati] = useState(filmsIniziali);
   const [generiUnici, setGeneriUnici] = useState(generiIniziali);
+  const [genereFiltro, setGenereFiltro] = useState('');
 
   // Funzione per gestire l'invio
   function gestisciInvio(event) {
@@ -64,19 +65,19 @@ function App() {
 
   // Uso di useEffect,(X Loris, ho provato a farlo Cosi, non so se era cosi che avrei dovuto)
   useEffect(() => {
-    // Operatore ternario per decidere cosa fare quando la ricerca è vuota
-    const filtrati = searchTerm.length === 0
-      ? films
-      // Filtro Dinamico che uso per filtrare con SearchTerm(dichiarato come usestate)(cerco sia genere che titolo in una sola istanza)
-      : films.filter(film => {
-        const search = searchTerm.toLowerCase();
-        return (
-          film.title.toLowerCase().includes(search) ||
-          film.genre.toLowerCase().includes(search)
-        );
-      });
+    let filtrati = films;
+    if (searchTerm.length > 0) {
+      const search = searchTerm.toLowerCase();
+      filtrati = filtrati.filter(film =>
+        film.title.toLowerCase().includes(search) ||
+        film.genre.toLowerCase().includes(search)
+      );
+    }
+    if (genereFiltro) {
+      filtrati = filtrati.filter(film => film.genre === genereFiltro);
+    }
     setFilmsFiltrati(filtrati);
-  }, [searchTerm, films]);
+  }, [searchTerm, films, genereFiltro]);
   // Queste sopra, sono le dipendenze di useeffect,(l'array di dipendenze come detto da Olga e Loris)
   return (
     <div className="pagina-intera">
@@ -86,13 +87,20 @@ function App() {
           <input type="text" placeholder='genere' value={nuovoGenere} onChange={(event) => { impostaNuovoGenere(event.target.value) }} />
           <button type="submit">Aggiungi Film</button>
         </form>
-        <input
-          type="text"
-          placeholder="Cerca per nome o per genere..."
-          value={searchTerm}
-          onChange={event => setSearchTerm(event.target.value)}
-        />
-
+        <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', marginTop: '1rem' }}>
+          <input
+            type="text"
+            placeholder="Cerca per nome o per genere..."
+            value={searchTerm}
+            onChange={event => setSearchTerm(event.target.value)}
+          />
+          <select value={genereFiltro} onChange={e => setGenereFiltro(e.target.value)}>
+            <option value="">Tutti i generi</option>
+            {generiUnici.map((genere, idx) => (
+              <option key={genere + idx} value={genere}>{genere}</option>
+            ))}
+          </select>
+        </div>
         <div className='film'>
           <ul className='flex'>
             {filmsFiltrati.map((film, index) => (
@@ -108,7 +116,6 @@ function App() {
         </div>
       </div>
 
-
       <div className="lista-generi">
         <div className='array-generi'>
           <h3>Lista dei generi disponibili</h3>
@@ -120,7 +127,6 @@ function App() {
         </div>
       </div>
     </div>
-
   );
 }
 
