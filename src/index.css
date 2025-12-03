@@ -91,3 +91,10 @@ div.array-generi ul>li:hover {
 h4:hover {
     color: green;
 }
+
+.cerca-per {
+    display: 'flex';
+    gap: '1rem';
+    align-items: 'center';
+    margin-Top: '1rem'
+}
